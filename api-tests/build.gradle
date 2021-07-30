@@ -1,0 +1,47 @@
+//TODO: to figure out and fix to use new gradle syntax
+group 'test-automation-example'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation "io.rest-assured:rest-assured:4.3.3"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.12.3"
+    implementation "com.github.javafaker:javafaker:1.0.2"
+    implementation 'org.aeonbits.owner:owner:1.0.4'
+    implementation 'io.qameta.allure:allure-testng:2.13.2'
+    implementation group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.12.1'
+
+    testCompile "org.testng:testng:7.3.0"
+}
+
+test {
+    useTestNG()
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+        showStandardStreams = true
+        exceptionFormat = "full"
+    }
+
+    test.outputs.upToDateWhen { false }
+}
+
+allure {
+    version = "2.13.8"
+    autoconfigure = true
+    aspectjweaver = true
+    configuration = "compile"
+//    useTestNg {
+//        version = "2.13.8"
+//    }
+
+}
+
+
