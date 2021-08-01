@@ -7,4 +7,11 @@ node {
         sh "./gradlew clean api-test:assemble"}
     stage("run api tests"){
         sh "./gradlew api-tests:test"}
-        }
+    allure([
+        includeProperties: false,
+        jdk: '',
+        properties: [],
+        reportBuildPolicy: 'ALWAYS',
+        results: [['path': 'api-tests/build/allure-results']]
+        ])
+}
